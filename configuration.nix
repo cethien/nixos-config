@@ -16,7 +16,7 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "lab"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -57,8 +57,7 @@
   users.users.cethien = {
     isNormalUser = true;
     description = "Borislaw Sotnikow";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
   };
 
   # Allow unfree packages
@@ -77,6 +76,8 @@
     docker
     docker-compose
   ];
+
+  virtualisation.docker.enable = true;
   
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -92,7 +93,7 @@
   services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 80 443 22 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = true;
